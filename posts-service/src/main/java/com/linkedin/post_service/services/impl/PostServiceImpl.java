@@ -3,6 +3,7 @@ package com.linkedin.post_service.services.impl;
 import com.linkedin.post_service.dto.PostCreateRequestDto;
 import com.linkedin.post_service.dto.PostDto;
 import com.linkedin.post_service.entities.Post;
+import com.linkedin.post_service.exceptions.ResourceNotFoundException;
 import com.linkedin.post_service.repositories.PostRepository;
 import com.linkedin.post_service.services.PostService;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +35,9 @@ public class PostServiceImpl implements PostService {
     @Override
     public PostDto getPostById(Long postId) {
         Post post = postRepository.findById(postId).orElse(null);
+        if (post == null) {
+            throw new ResourceNotFoundException("Post with ID: " + postId + " not found!");
+        }
         return modelMapper.map(post, PostDto.class);
     }
 }

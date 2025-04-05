@@ -2,6 +2,7 @@ package com.linkedin.post_service.controllers;
 
 import com.linkedin.post_service.dto.PostCreateRequestDto;
 import com.linkedin.post_service.dto.PostDto;
+import com.linkedin.post_service.exceptions.ResourceNotFoundException;
 import com.linkedin.post_service.services.PostService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +31,7 @@ public class PostController {
     @GetMapping(path = "/{postId}")
     public ResponseEntity<PostDto> getPost(@PathVariable Long postId) {
         PostDto post = postService.getPostById(postId);
-        return post != null ? ResponseEntity.ok(post) : ResponseEntity.notFound().build();
+        return new ResponseEntity<>(post, HttpStatus.OK);
     }
 
 }

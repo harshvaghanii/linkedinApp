@@ -1,4 +1,4 @@
-package com.linkedin.post_service.exceptions;
+package com.linkedin.post_service.advices;
 
 import lombok.Data;
 import org.springframework.http.HttpStatus;
