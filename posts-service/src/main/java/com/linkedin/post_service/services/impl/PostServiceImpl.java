@@ -30,4 +30,10 @@ public class PostServiceImpl implements PostService {
         log.info("Successfully mapped Post to PostDto before returning");
         return savedPostDto;
     }
+
+    @Override
+    public PostDto getPostById(Long postId) {
+        Post post = postRepository.findById(postId).orElse(null);
+        return modelMapper.map(post, PostDto.class);
+    }
 }
